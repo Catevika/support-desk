@@ -12,7 +12,7 @@ function Home() {
 				<FaQuestionCircle /> Create New Ticket
 			</Link>
 			<Link to='/tickets' className='btn btn-block'>
-				<FaTicketAlt /> View my Ticket
+				<FaTicketAlt /> View my Tickets
 			</Link>
 		</>
 	);
