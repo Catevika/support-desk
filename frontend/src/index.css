@@ -147,8 +147,8 @@ h3 {
 	cursor: pointer;
 	text-align: center;
 	-webkit-appearance: button;
-	   -moz-appearance: button;
-	        appearance: button;
+	-moz-appearance: button;
+	appearance: button;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -240,7 +240,7 @@ h3 {
 }
 
 .status-New {
-	background-color: green;
+	background-color: darkred;
 	color: #fff;
 	border-radius: 10px;
 }
@@ -252,7 +252,7 @@ h3 {
 }
 
 .status-Closed {
-	background-color: darkred;
+	background-color: green;
 	color: #fff;
 	border-radius: 10px;
 }
@@ -378,7 +378,7 @@ footer {
 	border-color: #000 transparent #555 transparent;
 	border-radius: 50%;
 	-webkit-animation: spin 1.2s linear infinite;
-	        animation: spin 1.2s linear infinite;
+	animation: spin 1.2s linear infinite;
 }
 
 @-webkit-keyframes spin {
