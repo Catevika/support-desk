@@ -97,53 +97,56 @@ export const ticketSlice = createSlice({
 		reset: (state) => initialState
 	},
 	extraReducers: (builder) => {
-		builder.addCase(createTicket.pending, (state) => {
-			state.isLoading = true;
-		});
-		builder.addCase(createTicket.fulfilled, (state) => {
-			state.isLoading = false;
-			state.isSuccess = true;
-		});
-		builder.addCase(createTicket.rejected, (state, action) => {
-			state.isLoading = false;
-			state.isError = true;
-			state.message = action.payload;
-		});
+		builder
+			.addCase(createTicket.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(createTicket.fulfilled, (state) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+			})
+			.addCase(createTicket.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
 
-		builder.addCase(getTickets.pending, (state) => {
-			state.isLoading = true;
-		});
-		builder.addCase(getTickets.fulfilled, (state, action) => {
-			state.isLoading = false;
-			state.isSuccess = true;
-			state.tickets = action.payload;
-		});
-		builder.addCase(getTickets.rejected, (state, action) => {
-			state.isLoading = false;
-			state.isError = true;
-			state.message = action.payload;
-		});
+			.addCase(getTickets.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getTickets.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.tickets = action.payload;
+			})
+			.addCase(getTickets.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
 
-		builder.addCase(getTicket.pending, (state) => {
-			state.isLoading = true;
-		});
-		builder.addCase(getTicket.fulfilled, (state, action) => {
-			state.isLoading = false;
-			state.isSuccess = true;
-			state.ticket = action.payload;
-		});
-		builder.addCase(getTicket.rejected, (state, action) => {
-			state.isLoading = false;
-			state.isError = true;
-			state.message = action.payload;
-		});
+			.addCase(getTicket.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getTicket.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.ticket = action.payload;
+			})
+			.addCase(getTicket.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
 
-		builder.addCase(closeTicket.fulfilled, (state, action) => {
-			state.isLoading = false;
-			state.tickets.map((ticket) =>
-				ticket._id === action.payload._id ? (ticket.status = 'Closed') : ticket
-			);
-		});
+			.addCase(closeTicket.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.tickets.map((ticket) =>
+					ticket._id === action.payload._id
+						? (ticket.status = 'Closed')
+						: ticket
+				);
+			});
 	}
 });
 
