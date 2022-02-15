@@ -7,10 +7,10 @@ const jwt = require('jsonwebtoken');
 // ? @routes  /api/users
 // ? @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-	const { name, email, password } = req.body;
+	const { name, email, password, role } = req.body;
 
 	// * validation
-	if (!name || !email || !password) {
+	if (!name || !email || !password || role === 'Select...') {
 		res.status(400);
 		throw new Error('Please include all fields');
 	}
@@ -31,7 +31,8 @@ const registerUser = asyncHandler(async (req, res) => {
 	const user = await User.create({
 		name,
 		email,
-		password: hashedPassword
+		password: hashedPassword,
+		role
 	});
 
 	if (user) {
@@ -39,6 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
 			_id: user._id,
 			name: user.name,
 			email: user.email,
+			role: user.role,
 			token: generateToken(user._id)
 		});
 	} else {
@@ -60,6 +62,7 @@ const loginUser = asyncHandler(async (req, res) => {
 			_id: user._id,
 			name: user.name,
 			email: user.email,
+			role: user.role,
 			token: generateToken(user._id)
 		});
 	} else {
@@ -75,7 +78,8 @@ const getMe = asyncHandler(async (req, res) => {
 	const user = {
 		id: req.user._id,
 		name: req.user.name,
-		email: req.user.email
+		email: req.user.email,
+		role: req.user.role
 	};
 	res.status(200).json(user);
 });
