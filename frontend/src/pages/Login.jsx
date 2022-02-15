@@ -9,10 +9,11 @@ import Spinner from '../components/Spinner';
 function Login() {
 	const [formData, setFormData] = useState({
 		email: '',
-		password: ''
+		password: '',
+		isAdmin: ''
 	});
 
-	const { email, password } = formData;
+	const { email, password, isAdmin } = formData;
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -46,7 +47,8 @@ function Login() {
 
 		const userData = {
 			email,
-			password
+			password,
+			isAdmin
 		};
 
 		dispatch(login(userData));
@@ -92,6 +94,22 @@ function Login() {
 							autoComplete='current-password'
 							required
 						/>
+					</div>
+					<div className='form-group'>
+						<label htmlFor='isAdmin'>Status</label>
+						<select
+							name='isAdmin'
+							id='isAdmin'
+							value={isAdmin}
+							onChange={onChange}
+							required
+						>
+							<option disabled value='Select...'>
+								Select...
+							</option>
+							<option value='Administrator'>Administrator</option>
+							<option value='Employee'>Employee</option>
+						</select>
 					</div>
 					<div className='form-group'>
 						<button className='btn btn-block'>Submit</button>
