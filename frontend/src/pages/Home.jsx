@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FaQuestionCircle, FaTicketAlt } from 'react-icons/fa';
+import { CgProfile } from 'react-icons/cg';
 
 function Home() {
 	return (
@@ -13,6 +14,9 @@ function Home() {
 			</Link>
 			<Link to='/tickets' className='btn btn-block'>
 				<FaTicketAlt /> View my Tickets
+			</Link>
+			<Link to='/users/me' className='btn btn-block'>
+				<CgProfile /> View my Profile
 			</Link>
 		</>
 	);

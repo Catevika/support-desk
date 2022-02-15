@@ -6,6 +6,7 @@ import BackButton from '../components/BackButton';
 import TicketItem from '../components/TicketItem';
 
 function Tickets() {
+	const { user } = useSelector((state) => state.auth);
 	const { tickets, isLoading, isSuccess } = useSelector(
 		(state) => state.tickets
 	);
@@ -28,7 +29,7 @@ function Tickets() {
 		return <Spinner />;
 	}
 
-	return (
+	return tickets.length > 0 ? (
 		<>
 			<BackButton url='/' />
 			<h1>Tickets</h1>
@@ -37,13 +38,20 @@ function Tickets() {
 					<div>Date</div>
 					<div>Product</div>
 					<div>Status</div>
-					<div></div>
 				</div>
-				{tickets.map((ticket) => (
-					<TicketItem key={ticket._id} ticket={ticket} />
-				))}
+				{tickets.length === 0 ? (
+					<h3 style={{ color: 'steelblue' }}>
+						No tickets from {user.name} yet
+					</h3>
+				) : (
+					tickets.map((ticket) => (
+						<TicketItem key={ticket._id} ticket={ticket} />
+					))
+				)}
 			</div>
 		</>
+	) : (
+		<h1 style={{ color: 'steelblue' }}>No Ticket yet</h1>
 	);
 }
 
