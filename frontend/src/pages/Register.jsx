@@ -14,15 +14,15 @@ function Register() {
 		email: '',
 		password: '',
 		password2: '',
-		isAdmin: 'Select...'
+		type: 'Select...'
 	});
 
 	const { user, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.auth
 	);
 
-	const { name, email, password, password2, isAdmin } = formData;
-	// const [isAdmin, setIsAdmin] = useState('Employee');
+	const { name, email, password, password2, type } = formData;
+	// const [type, settype] = useState('Employee');
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -55,7 +55,7 @@ function Register() {
 				name,
 				email,
 				password,
-				isAdmin
+				type
 			};
 
 			dispatch(register(userData));
@@ -128,18 +128,19 @@ function Register() {
 						/>
 					</div>
 					<div className='form-group'>
-						<label htmlFor='isAdmin'>Status</label>
+						<label htmlFor='type'>User Type</label>
 						<select
-							name='isAdmin'
-							id='isAdmin'
-							value={isAdmin}
+							name='type'
+							id='type'
+							value={type}
 							onChange={onChange}
 							required
 						>
-							<option disabled value='Select...'>
+							<option disabled value=''>
 								Select...
 							</option>
 							<option value='Administrator'>Administrator</option>
+							<option value='Technician'>Technician</option>
 							<option value='Employee'>Employee</option>
 						</select>
 					</div>

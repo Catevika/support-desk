@@ -15,9 +15,9 @@ const userSchema = mongoose.Schema(
 			type: String,
 			required: [true, 'Please add a password']
 		},
-		isAdmin: {
+		type: {
 			type: String,
-			enum: ['Select...', 'Administrator', 'Employee']
+			enum: ['Select...', 'Administrator', 'Technician', 'Employee']
 		}
 	},
 	{

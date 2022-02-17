@@ -7,10 +7,10 @@ const jwt = require('jsonwebtoken');
 // ? @routes  /api/users
 // ? @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-	const { name, email, password, isAdmin } = req.body;
+	const { name, email, password, type } = req.body;
 
 	// * validation
-	if (!name || !email || !password || isAdmin === 'Select...') {
+	if (!name || !email || !password || type === 'Select...') {
 		res.status(400);
 		throw new Error('Please include all fields');
 	}
@@ -32,7 +32,7 @@ const registerUser = asyncHandler(async (req, res) => {
 		name,
 		email,
 		password: hashedPassword,
-		isAdmin
+		type
 	});
 
 	if (user) {
@@ -41,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
 			name: user.name,
 			email: user.email,
 			token: generateToken(user._id),
-			isAdmin: user.isAdmin
+			type: user.type
 		});
 	} else {
 		res.status(400);
@@ -63,7 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
 			name: user.name,
 			email: user.email,
 			token: generateToken(user._id),
-			isAdmin: user.isAdmin
+			type: user.type
 		});
 	} else {
 		res.status(401);
@@ -79,7 +79,7 @@ const getMe = asyncHandler(async (req, res) => {
 		id: req.user._id,
 		name: req.user.name,
 		email: req.user.email,
-		isAdmin: req.user.isAdmin
+		type: req.user.type
 	};
 	res.status(200).json(user);
 });

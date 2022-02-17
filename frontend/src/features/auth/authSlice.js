@@ -10,7 +10,7 @@ const initialState = {
 	isSuccess: false,
 	isLoading: false,
 	message: '',
-	isAdmin: ''
+	type: ''
 };
 
 // * Register new user

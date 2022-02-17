@@ -10,10 +10,10 @@ function Login() {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
-		isAdmin: ''
+		type: ''
 	});
 
-	const { email, password, isAdmin } = formData;
+	const { email, password, type } = formData;
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -48,7 +48,7 @@ function Login() {
 		const userData = {
 			email,
 			password,
-			isAdmin
+			type
 		};
 
 		dispatch(login(userData));
@@ -96,18 +96,19 @@ function Login() {
 						/>
 					</div>
 					<div className='form-group'>
-						<label htmlFor='isAdmin'>Status</label>
+						<label htmlFor='type'>User Type</label>
 						<select
-							name='isAdmin'
-							id='isAdmin'
-							value={isAdmin}
+							name='type'
+							id='type'
+							value={type}
 							onChange={onChange}
 							required
 						>
-							<option disabled value='Select...'>
+							<option disabled value=''>
 								Select...
 							</option>
 							<option value='Administrator'>Administrator</option>
+							<option value='Technician'>Technician</option>
 							<option value='Employee'>Employee</option>
 						</select>
 					</div>
