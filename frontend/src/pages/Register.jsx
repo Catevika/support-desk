@@ -6,19 +6,23 @@ import { register, reset } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 
+// ? TODO - attention la base est une base de test - Remettre MONGO_URI de la base de production
+
 function Register() {
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
 		password: '',
-		password2: ''
+		password2: '',
+		type: 'Select...'
 	});
-
-	const { name, email, password, password2 } = formData;
 
 	const { user, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.auth
 	);
+
+	const { name, email, password, password2, type } = formData;
+	// const [type, settype] = useState('Employee');
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -50,7 +54,8 @@ function Register() {
 			const userData = {
 				name,
 				email,
-				password
+				password,
+				type
 			};
 
 			dispatch(register(userData));
@@ -121,6 +126,23 @@ function Register() {
 							autoComplete='new-password'
 							required
 						/>
+					</div>
+					<div className='form-group'>
+						<label htmlFor='type'>User Type</label>
+						<select
+							name='type'
+							id='type'
+							value={type}
+							onChange={onChange}
+							required
+						>
+							<option disabled value=''>
+								Select...
+							</option>
+							<option value='Administrator'>Administrator</option>
+							<option value='Technician'>Technician</option>
+							<option value='Employee'>Employee</option>
+						</select>
 					</div>
 					<div className='form-group'>
 						<button className='btn btn-block'>Submit</button>

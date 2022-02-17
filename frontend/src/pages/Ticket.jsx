@@ -43,7 +43,7 @@ function Ticket() {
 
 	useEffect(() => {
 		if (isError) {
-			toast.message(message);
+			toast.error(message);
 		}
 
 		dispatch(getTicket(ticketId));
@@ -82,12 +82,15 @@ function Ticket() {
 				<BackButton url='/tickets' />
 				<h2>
 					Ticket Id: {ticket._id}
-					<span className={`status status-${ticket.status}`}></span>
+					<span className={`status status-${ticket.status}`}>
+						{ticket.status}
+					</span>
 				</h2>
 				<hr />
 				<h3>
 					Date Submitted: {new Date(ticket.createdAt).toLocaleString('en-US')}
 				</h3>
+
 				<div className='ticket-desc'>
 					<h3>Product</h3>
 					<p>{ticket.product}</p>

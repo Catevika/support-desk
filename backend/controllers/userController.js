@@ -7,10 +7,10 @@ const jwt = require('jsonwebtoken');
 // ? @routes  /api/users
 // ? @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-	const { name, email, password } = req.body;
+	const { name, email, password, type } = req.body;
 
 	// * validation
-	if (!name || !email || !password) {
+	if (!name || !email || !password || type === 'Select...') {
 		res.status(400);
 		throw new Error('Please include all fields');
 	}
@@ -31,7 +31,8 @@ const registerUser = asyncHandler(async (req, res) => {
 	const user = await User.create({
 		name,
 		email,
-		password: hashedPassword
+		password: hashedPassword,
+		type
 	});
 
 	if (user) {
@@ -39,7 +40,8 @@ const registerUser = asyncHandler(async (req, res) => {
 			_id: user._id,
 			name: user.name,
 			email: user.email,
-			token: generateToken(user._id)
+			token: generateToken(user._id),
+			type: user.type
 		});
 	} else {
 		res.status(400);
@@ -60,7 +62,8 @@ const loginUser = asyncHandler(async (req, res) => {
 			_id: user._id,
 			name: user.name,
 			email: user.email,
-			token: generateToken(user._id)
+			token: generateToken(user._id),
+			type: user.type
 		});
 	} else {
 		res.status(401);
@@ -75,7 +78,8 @@ const getMe = asyncHandler(async (req, res) => {
 	const user = {
 		id: req.user._id,
 		name: req.user.name,
-		email: req.user.email
+		email: req.user.email,
+		type: req.user.type
 	};
 	res.status(200).json(user);
 });
