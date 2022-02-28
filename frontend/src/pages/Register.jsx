@@ -24,7 +24,7 @@ function Register() {
 
 	const { name, email, password, password2, role } = formData;
 
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	useEffect(() => {

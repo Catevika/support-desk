@@ -11,10 +11,11 @@ function Login() {
 
 	const [formData, setFormData] = useState({
 		email: '',
-		password: ''
+		password: '',
+		type: ''
 	});
 
-	const { email, password } = formData;
+	const { email, password, type } = formData;
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -52,7 +53,8 @@ function Login() {
 
 		const userData = {
 			email,
-			password
+			password,
+			type
 		};
 
 		dispatch(login(userData));
