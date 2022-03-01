@@ -42,7 +42,7 @@ h3 {
 
 .container {
 	width: 100%;
-	max-width: 960px;
+	max-width: 1024px;
 	margin: 0 auto;
 	padding: 0 20px;
 	text-align: center;
@@ -219,6 +219,19 @@ h3 {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 20px;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	background: #f4f4f4;
+	padding: 10px 15px;
+	border-radius: 5px;
+	text-align: center;
+}
+.user,
+.user-headings {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 10px;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 20px;

@@ -3,6 +3,18 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 
+// ? @desc    Get user list
+// ? @routes  /api/users
+// ? @access  Public
+const getUserList = async (req, res) => {
+	const users = await User.find();
+	if (!users || users.length === 0) {
+		res.status(401);
+		throw new Error('No User found');
+	}
+	res.status(200).json(users);
+};
+
 // ? @desc    Register a new user
 // ? @routes  /api/users
 // ? @access  Public
@@ -53,10 +65,10 @@ const registerUser = asyncHandler(async (req, res) => {
 // ? @routes  /api/users/login
 // ? @access  Public
 const loginUser = asyncHandler(async (req, res) => {
-	const { email, password } = req.body;
+	const { email, password, role } = req.body;
 
 	const user = await User.findOne({ email });
-	// * Check user and password match
+	// * Check user, password and role match
 	if (user && (await bcrypt.compare(password, user.password))) {
 		res.status(200).json({
 			_id: user._id,
@@ -91,4 +103,4 @@ const generateToken = (id) => {
 	});
 };
 
-module.exports = { registerUser, loginUser, getMe };
+module.exports = { getUserList, registerUser, loginUser, getMe };

@@ -14,7 +14,7 @@ function Login() {
 		password: ''
 	});
 
-	const { email, password, type } = formData;
+	const { email, password } = formData;
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();

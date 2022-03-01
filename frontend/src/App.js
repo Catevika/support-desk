@@ -9,6 +9,7 @@ import Register from './pages/Register';
 import NewTicket from './pages/NewTicket';
 import Tickets from './pages/Tickets';
 import Ticket from './pages/Ticket';
+import Users from './pages/Users';
 import User from './pages/User';
 import Error from './pages/Error';
 
@@ -24,6 +25,8 @@ function App() {
 						<Route path='/login' element={<Login />} />
 
 						{/* Users routes */}
+						<Route path='/users/all' element={<Users />} />
+
 						<Route path='/users/me' element={<PrivateRoute />}>
 							<Route path='/users/me' element={<User />} />
 						</Route>
