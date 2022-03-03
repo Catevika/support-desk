@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaSignInAlt } from 'react-icons/fa';
@@ -7,8 +7,6 @@ import { login, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 
 function Login() {
-	const userRef = useRef();
-
 	const [formData, setFormData] = useState({
 		email: '',
 		password: ''
@@ -22,11 +20,6 @@ function Login() {
 	const { user, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.auth
 	);
-
-	useEffect(() => {
-		userRef.current.focus();
-	}, []);
-
 	useEffect(() => {
 		if (isError) {
 			toast.error(message);
@@ -76,7 +69,7 @@ function Login() {
 					<div className='form-group'>
 						<label htmlFor='email'>Email:</label>
 						<input
-							ref={userRef}
+							autoFocus={true}
 							type='email'
 							className='form-control'
 							id='email'
@@ -84,7 +77,7 @@ function Login() {
 							value={email}
 							onChange={onChange}
 							placeholder='Enter your email'
-							autoComplete='username'
+							autoComplete='email'
 							required
 						/>
 					</div>

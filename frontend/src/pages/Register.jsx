@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { FaUser } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,7 +9,6 @@ import Spinner from '../components/Spinner';
 // ? TODO - attention la base est une base de test - Remettre MONGO_URI de la base de production
 
 function Register() {
-	const userRef = useRef();
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -26,10 +25,6 @@ function Register() {
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-
-	useEffect(() => {
-		userRef.current.focus();
-	}, []);
 
 	useEffect(() => {
 		if (isError) {
@@ -83,7 +78,7 @@ function Register() {
 					<div className='form-group'>
 						<label htmlFor='name'>Name:</label>
 						<input
-							ref={userRef}
+							autoFocus={true}
 							type='text'
 							className='form-control'
 							id='name'
@@ -105,7 +100,7 @@ function Register() {
 							value={email}
 							onChange={onChange}
 							placeholder='Enter your email'
-							autoComplete='username'
+							autoComplete='email'
 							required
 						/>
 					</div>
@@ -119,7 +114,7 @@ function Register() {
 							value={password}
 							onChange={onChange}
 							placeholder='Enter your password'
-							autoComplete='current-password'
+							autoComplete='new-password'
 							required
 						/>
 					</div>
