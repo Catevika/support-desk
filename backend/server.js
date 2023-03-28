@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const { errorHandler } = require('./middleware/errorMiddleware');
 
 require('dotenv').config();
@@ -23,10 +24,12 @@ app.use('/api/tickets', require('./routes/ticketRoutes'));
 
 // * Serve Frontend
 if (process.env.NODE_ENV === 'production') {
+	app.use('/api', createProxyMiddleware({ target: 'http://localhost:5000', changeOrigin: true }));
+
 	// * Set build folder as static
-	app.use(express.static(path.join(__dirname, 'frontend', 'build')));
+	app.use(express.static(path.join(__dirname, '../frontend/build')));
 	app.get('*', (_, res) => {
-		res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+		res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 	});
 } else {
 	app.get('/', (req, res) => {
