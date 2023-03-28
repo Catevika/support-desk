@@ -22,11 +22,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/tickets', require('./routes/ticketRoutes'));
 
-// * Serve Frontend
 if (process.env.NODE_ENV === 'production') {
 	app.use('/api', createProxyMiddleware({ target: 'http://localhost:5000', changeOrigin: true }));
 
-	// * Set build folder as static
 	app.use(express.static(path.join(__dirname, '../frontend/build')));
 	app.get('*', (_, res) => {
 		res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
@@ -36,6 +34,10 @@ if (process.env.NODE_ENV === 'production') {
 		res.status(200).json({ message: 'Welcome to the Support Desk API' });
 	});
 }
+
+app.use(errorHandler);
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 app.use(errorHandler);
 
