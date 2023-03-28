@@ -41,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
 			name: user.name,
 			email: user.email,
 			role: user.role,
-			token: generateToken(user._id)
+			token: jwt.sign({ id: user._id }, process.env.JWT_SECRET, { algorithm: 'RS256', expiresIn: '30d' })
 		});
 	} else {
 		res.status(400);
@@ -63,7 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
 			name: user.name,
 			email: user.email,
 			role: user.role,
-			token: generateToken(user._id)
+			token: jwt.sign({ id: user._id }, process.env.JWT_SECRET, { algorithm: 'RS256', expiresIn: '30d' })
 		});
 	} else {
 		res.status(401);
@@ -83,12 +83,5 @@ const getMe = asyncHandler(async (req, res) => {
 	};
 	res.status(200).json(user);
 });
-
-// * Generate Token
-const generateToken = (id) => {
-	return jwt.sign({ id }, process.env.JWT_SECRET, {
-		expiresIn: '30d'
-	});
-};
 
 module.exports = { registerUser, loginUser, getMe };
