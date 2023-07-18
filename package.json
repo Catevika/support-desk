@@ -19,7 +19,7 @@
     "express-async-handler": "^1.2.0",
     "http-proxy-middleware": "^2.0.6",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.0.3",
+    "mongoose": "^7.3.3",
     "production": "^0.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
